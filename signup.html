@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAY54 – Create Account</title>
+
+    <link rel="stylesheet" href="src/css/global.css">
+    <link rel="stylesheet" href="src/css/auth.css">
+
+    <style>
+        .signup-container {
+            max-width: 420px;
+            margin: 60px auto;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 35px;
+            border-radius: 16px;
+            backdrop-filter: blur(6px);
+        }
+        .otp-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .otp-box {
+            background: #0c0f1d;
+            padding: 25px;
+            border-radius: 12px;
+            width: 340px;
+            text-align: center;
+            border: 1px solid #1f3bff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signup-container">
+        <h2>Create your PAY54 SmartWallet</h2>
+        <p>Sign up to send, save, shop, pay and invest globally.</p>
+
+        <form id="signupForm" novalidate>
+
+            <label>Full Name</label>
+            <input type="text" id="fullName" placeholder="John Doe" required>
+
+            <label>Email or Phone</label>
+            <input type="text" id="identifier" placeholder="you@pay54.app or +23480…" required>
+
+            <label>Create 4-digit PIN</label>
+            <input type="password" maxlength="4" id="pin" placeholder="****" required>
+
+            <label>Confirm PIN</label>
+            <input type="password" maxlength="4" id="confirmPin" placeholder="****" required>
+
+            <button type="submit" class="primary-btn">Create Account</button>
+
+        </form>
+
+        <p style="margin-top:15px; text-align:center;">
+            Already have an account?
+            <a href="index.html">Sign in</a>
+        </p>
+    </div>
+
+
+    <!-- OTP Modal -->
+    <div class="otp-modal" id="otpModal">
+        <div class="otp-box">
+            <h3>Verify Your Identity</h3>
+            <p>Enter the 6-digit OTP sent to your email/phone.</p>
+
+            <input id="otpInput" maxlength="6" placeholder="123456" style="text-align:center;">
+
+            <button onclick="verifyOtp()" class="primary-btn" style="margin-top:15px;">
+                Verify & Continue
+            </button>
+        </div>
+    </div>
+
+<script>
+    const modal = document.getElementById("otpModal");
+
+    // Handle Signup
+    document.getElementById("signupForm").addEventListener("submit", function(e){
+        e.preventDefault();
+
+        const name = document.getElementById("fullName").value.trim();
+        const id = document.getElementById("identifier").value.trim();
+        const pin = document.getElementById("pin").value.trim();
+        const confirmPin = document.getElementById("confirmPin").value.trim();
+
+        if(pin !== confirmPin){
+            alert("PINs do not match.");
+            return;
+        }
+
+        if(pin.length !== 4){
+            alert("PIN must be 4 digits.");
+            return;
+        }
+
+        // Save user mock DB
+        const user = { name, id, pin };
+        localStorage.setItem("pay54_user", JSON.stringify(user));
+
+        // Show OTP modal
+        modal.style.display = "flex";
+    });
+
+    // OTP Verification (mock)
+    function verifyOtp(){
+        const otp = document.getElementById("otpInput").value;
+
+        if(otp.length !== 6){
+            alert("Invalid OTP");
+            return;
+        }
+
+        modal.style.display = "none";
+        alert("Account created successfully!");
+
+        // Redirect user to login
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
