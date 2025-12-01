@@ -1,31 +1,36 @@
-// PAY54 v6.5 — Signup Handler
+// PAY54 v6.5 — SIGNUP HANDLER
 
-document.getElementById("signupForm").addEventListener("submit", function (e) {
+document.getElementById("signupForm").addEventListener("submit", function(e){
     e.preventDefault();
 
-    const name = document.getElementById("fullName").value.trim();
-    const id = document.getElementById("identifier").value.trim();
-    const pin1 = document.getElementById("pin").value.trim();
-    const pin2 = document.getElementById("pin2").value.trim();
+    const name = document.getElementById("signupName").value.trim();
+    const id = document.getElementById("signupIdentifier").value.trim();
+    const pin = document.getElementById("signupPin").value.trim();
+    const pin2 = document.getElementById("signupPin2").value.trim();
 
-    if (pin1.length !== 4 || pin2.length !== 4) {
+    // Basic validation
+    if(pin.length !== 4){
         alert("PIN must be exactly 4 digits.");
         return;
     }
 
-    if (pin1 !== pin2) {
+    if(pin !== pin2){
         alert("PINs do not match.");
         return;
     }
 
+    // Save user
     const user = {
-        name: name,
-        id: id,
-        pin: pin1
+        name,
+        id,
+        pin,
+        createdAt: new Date().toISOString()
     };
 
     localStorage.setItem("pay54_user", JSON.stringify(user));
 
-    alert("Account created successfully! Please sign in.");
+    alert("Account created successfully!");
+
+    // Redirect to login
     window.location.href = "index.html";
 });
