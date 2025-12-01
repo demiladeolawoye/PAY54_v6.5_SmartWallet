@@ -2,208 +2,234 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>PAY54 v6.5 – Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PAY54 v6.5 — SmartWallet Dashboard</title>
 
+  <!-- Core styles -->
   <link rel="stylesheet" href="src/css/global.css" />
+  <link rel="stylesheet" href="src/css/auth.css" />
   <link rel="stylesheet" href="src/css/dashboard.css" />
 </head>
-<body class="theme-dark">
-  <!-- Top navbar -->
-  <header class="nav">
-    <div class="nav-left" id="navHome">
-      <div class="brand-shield">P54</div>
-      <div class="brand-copy">
-        <span class="brand-title">PAY54</span>
-        <span class="brand-tagline">Hybrid Money • NG + Global</span>
-      </div>
-      <span class="version-pill">v6.5</span>
-    </div>
 
-    <div class="nav-right">
-      <button id="themeToggle" class="theme-toggle">
-        <span id="themeIcon">🌙</span>
-        <span id="themeLabel">Light</span>
-      </button>
-
-      <div class="user-menu">
-        <button id="userMenuBtn" class="user-chip">
-          <div class="avatar-circle">D</div>
-          <span id="userNameLabel">Demi</span>
-          <span class="chevron">▾</span>
-        </button>
-        <div id="userMenuDropdown" class="user-dropdown">
-          <button data-action="profile">👤 Profile</button>
-          <button data-action="settings">⚙️ Settings</button>
-          <button data-action="support">💬 Support centre</button>
-          <hr />
-          <button data-action="logout" class="danger">🚪 Logout</button>
+<body class="dash-body">
+  <div class="dash-shell">
+    <!-- HEADER / NAV -->
+    <header class="dash-header">
+      <div class="dash-brand" onclick="window.location.href='dashboard.html'">
+        <div class="brand-shield">P54</div>
+        <div class="brand-text">
+          <div class="brand-row">
+            <span class="brand-name">PAY54</span>
+            <span class="brand-pill">SmartWallet v6.5</span>
+          </div>
+          <span class="brand-tagline">Hybrid Money • NG + Global</span>
         </div>
       </div>
-    </div>
-  </header>
 
-  <!-- Main content -->
-  <main class="page">
-    <section class="welcome-block">
-      <div>
-        <h1>Welcome back, <span id="welcomeName">Demi</span> 👋</h1>
-        <p>Here’s what’s happening with your PAY54 wallet today.</p>
+      <div class="dash-header-right">
+        <button class="chip chip-muted" id="countryChip">
+          🇳🇬 NGN Wallet
+        </button>
+
+        <div class="user-pill" id="userMenu">
+          <div class="user-avatar" id="userAvatar"></div>
+          <div class="user-meta">
+            <span class="user-name" id="userName">Demi</span>
+            <span class="user-id" id="userId">@pay54user</span>
+          </div>
+          <button class="user-menu-dot" id="logoutBtn" title="Logout">⎋</button>
+        </div>
       </div>
-      <div class="quick-view">
-        <button id="quickKyc" class="ghost-button">KYC Tier 2 • NGN</button>
-        <button id="quickLimits" class="ghost-button">Daily limit ₦500,000</button>
-      </div>
-    </section>
+    </header>
 
-    <!-- Balance card -->
-    <section class="card balance-card">
-      <div>
-        <p class="label">Total Balance (₦)</p>
-        <p id="balanceAmount" class="big-amount">₦245,500.00</p>
-        <p class="muted" id="walletId">Wallet: P54-1029-3456-78</p>
-        <p class="muted">
-          Account No: <strong id="accountNumber">1029 3456 78</strong> •
-          KYC: <span class="pill pill-success">Tier 2 (Verified)</span>
-        </p>
-      </div>
-      <div class="balance-actions">
-        <button id="refreshBalanceBtn" class="secondary-button">
-          🔄 Refresh
-        </button>
-      </div>
-    </section>
+    <!-- MAIN -->
+    <main class="dash-main">
+      <!-- WELCOME -->
+      <section class="welcome-row">
+        <div>
+          <h1 class="welcome-title" id="welcomeTitle">Welcome back, Demi 👋</h1>
+          <p class="welcome-sub">
+            Here’s what’s happening with your PAY54 SmartWallet today.
+          </p>
+        </div>
+        <div class="welcome-actions">
+          <button class="chip chip-soft" id="quickSendBtn">⚡ Quick send</button>
+          <button class="chip chip-soft" id="myProfileBtn">👤 My profile</button>
+        </div>
+      </section>
 
-    <!-- Security banner -->
-    <section class="card banner banner-security">
-      <div class="banner-icon">🔒</div>
-      <div>
-        <h2>Security Envelope</h2>
-        <p>
-          Device binding, 2-factor prompts and AI Risk Watch monitor every
-          transaction in real time.
-        </p>
-      </div>
-    </section>
+      <!-- BALANCE / SECURITY / FX -->
+      <section class="top-grid">
+        <!-- BALANCE CARD -->
+        <article class="balance-card">
+          <div class="balance-main">
+            <p class="balance-label">Total balance (₦)</p>
+            <p class="balance-amount" id="balanceAmount">₦0.00</p>
+            <p class="balance-mini" id="fxBalanceHint">≈ $0.00 at ₦1,350/$</p>
 
-    <!-- Finance banner -->
-    <section class="card banner banner-finance">
-      <div class="banner-icon">💹</div>
-      <div>
-        <h2>FX & Yield Signals</h2>
-        <p>
-          ₦ → $ mid-rate: <span id="fxRateLabel">₦1,350 = $1</span> •
-          Pay in USD or NGN at checkout for investments & stocks.
-        </p>
-      </div>
-    </section>
+            <div class="wallet-meta">
+              <span id="walletId">Wallet: P54-0000-0000-00</span>
+              <span id="accountNumber">Account: 0000000000</span>
+              <span id="kycLevel">KYC: Tier 2 (BVN verified)</span>
+            </div>
+          </div>
 
-    <!-- Money moves -->
-    <section>
-      <div class="section-header">
-        <h2>Money Moves</h2>
-      </div>
-      <div class="grid grid-4">
-        <button class="action-tile" id="sendMoneyBtn">
-          <span class="tile-icon">💸</span>
-          <span class="tile-title">Send Money</span>
-          <span class="tile-desc">P2P & bank transfers</span>
-        </button>
-        <button class="action-tile" id="receiveMoneyBtn">
-          <span class="tile-icon">📥</span>
-          <span class="tile-title">Receive Money</span>
-          <span class="tile-desc">@paytag & QR</span>
-        </button>
-        <button class="action-tile" id="addWithdrawBtn">
-          <span class="tile-icon">➕</span>
-          <span class="tile-title">Add / Withdraw</span>
-          <span class="tile-desc">Cards • Banks • Agents</span>
-        </button>
-        <button class="action-tile" id="bankTransferBtn">
-          <span class="tile-icon">🏦</span>
-          <span class="tile-title">Bank Transfer</span>
-          <span class="tile-desc">NUBAN accounts</span>
-        </button>
-      </div>
-    </section>
+          <div class="balance-side">
+            <button class="btn btn-outline" id="refreshBalanceBtn">
+              🔄 Refresh
+            </button>
+            <p class="limit-text">
+              Daily limit: ₦500,000 • FX enabled
+            </p>
+          </div>
+        </article>
 
-    <!-- Services -->
-    <section>
-      <div class="section-header">
-        <h2>Services</h2>
-      </div>
-      <div class="grid grid-4">
-        <button class="service-tile" id="crossBorderBtn">
-          <span class="tile-icon">🌍</span>
-          <h3>Cross-Border</h3>
-          <p>NG → UK • US • SA • GH</p>
-        </button>
+        <!-- SECURITY -->
+        <article class="soft-card security-card">
+          <div class="soft-icon">🔒</div>
+          <div>
+            <h2>Security Envelope</h2>
+            <p>
+              Device binding, 4-digit PIN, AI Risk Watch & smart rules protect
+              every move.
+            </p>
+            <p class="soft-footnote">
+              Last security scan: <span id="lastScanText">Just now • 0 flags</span>
+            </p>
+          </div>
+        </article>
 
-        <button class="service-tile" id="savingsBtn">
-          <span class="tile-icon">💰</span>
-          <h3>Savings & Goals</h3>
-          <p>Create pots & standing orders</p>
-        </button>
+        <!-- FX -->
+        <article class="soft-card fx-card">
+          <div class="soft-icon">💹</div>
+          <div>
+            <h2>Smart FX rails</h2>
+            <p id="fxRateText">
+              ₦1,350 ≈ $1.00 • NGN → USD / GBP / EUR via partner banks.
+            </p>
+            <p class="soft-footnote">
+              Cross-border ready: 🇳🇬 → 🇬🇧 🇺🇸 🇪🇺
+            </p>
+          </div>
+        </article>
+      </section>
 
-        <button class="service-tile" id="billsBtn">
-          <span class="tile-icon">💡</span>
-          <h3>Bills & Top-Up</h3>
-          <p>Water • Power • TV • Airtime</p>
-        </button>
+      <!-- MONEY MOVES -->
+      <section class="section-block">
+        <div class="section-head">
+          <h2>Money Moves</h2>
+          <span class="section-sub">Fast actions for everyday transfers.</span>
+        </div>
 
-        <button class="service-tile" id="cardsBtn">
-          <span class="tile-icon">💳</span>
-          <h3>Cards</h3>
-          <p>Virtual + linked cards</p>
-        </button>
+        <div class="action-grid">
+          <button class="action-card" id="sendMoneyCard">
+            <div class="action-icon">💸</div>
+            <div class="action-text">
+              <h3>Send money</h3>
+              <p>P2P, bank & @paytags</p>
+            </div>
+          </button>
 
-        <button class="service-tile" id="shopBtn">
-          <span class="tile-icon">🛍️</span>
-          <h3>Shop on the Fly</h3>
-          <p>Taxi • Food • Tickets • Shops</p>
-        </button>
+          <button class="action-card" id="receiveMoneyCard">
+            <div class="action-icon">📥</div>
+            <div class="action-text">
+              <h3>Receive</h3>
+              <p>QR, paylink & requests</p>
+            </div>
+          </button>
 
-        <button class="service-tile" id="investBtn">
-          <span class="tile-icon">📈</span>
-          <h3>Invest & Stocks</h3>
-          <p>Pay in USD or NGN</p>
-        </button>
+          <button class="action-card" id="topUpCard">
+            <div class="action-icon">➕</div>
+            <div class="action-text">
+              <h3>Add / withdraw</h3>
+              <p>Cards • banks • agents</p>
+            </div>
+          </button>
 
-        <button class="service-tile" id="agentBtn">
-          <span class="tile-icon">🧍‍♂️</span>
-          <h3>Become an Agent</h3>
-          <p>BVN • NIN • Selfie KYC</p>
-        </button>
+          <button class="action-card" id="billsCard">
+            <div class="action-icon">💡</div>
+            <div class="action-text">
+              <h3>Bills & airtime</h3>
+              <p>Power, data, TV & more</p>
+            </div>
+          </button>
+        </div>
+      </section>
 
-        <button class="service-tile" id="aiRiskBtn">
-          <span class="tile-icon">🤖</span>
-          <h3>AI Risk Watch</h3>
-          <p>Flags risky behaviour</p>
-        </button>
-      </div>
-    </section>
+      <!-- SERVICES -->
+      <section class="section-block">
+        <div class="section-head">
+          <h2>Services</h2>
+          <span class="section-sub">Everything in one SmartWallet.</span>
+        </div>
 
-    <!-- Recent transactions -->
-    <section>
-      <div class="section-header">
-        <h2>Recent Transactions</h2>
-        <button id="viewAllTxBtn" class="secondary-button small">
-          View all (mock)
-        </button>
-      </div>
-      <div id="transactionsList" class="card tx-list">
-        <!-- Filled by JS -->
-      </div>
-    </section>
-  </main>
+        <div class="services-grid">
+          <button class="service-card" id="crossBorderCard">
+            <span class="service-icon">🌍</span>
+            <h3>Cross-border</h3>
+            <p>Send NGN → FX to UK / US / EU.</p>
+          </button>
 
-  <!-- Scroll to top -->
-  <button id="scrollTopBtn" class="scroll-top">⬆️</button>
+          <button class="service-card" id="savingsCard">
+            <span class="service-icon">💰</span>
+            <h3>Savings & goals</h3>
+            <p>Target pots, auto-save, FX yield.</p>
+          </button>
 
-  <!-- Shared modals, receipts, etc. are created by JS -->
-  <div id="modalRoot"></div>
-  <div id="toastRoot" class="toast toast-hidden"></div>
+          <button class="service-card" id="cardsCard">
+            <span class="service-icon">💳</span>
+            <h3>Virtual & linked cards</h3>
+            <p>Tap to pay, default online card.</p>
+          </button>
 
+          <button class="service-card" id="shopCard">
+            <span class="service-icon">🛒</span>
+            <h3>Shop on the Fly</h3>
+            <p>Taxi • food • tickets • shops.</p>
+          </button>
+
+          <button class="service-card" id="investCard">
+            <span class="service-icon">📈</span>
+            <h3>Investments</h3>
+            <p>Buy in $ or ₦, see portfolio.</p>
+          </button>
+
+          <button class="service-card" id="agentCard">
+            <span class="service-icon">🧍‍♂️</span>
+            <h3>Become an agent</h3>
+            <p>Onboard customers, earn fees.</p>
+          </button>
+        </div>
+      </section>
+
+      <!-- RECENT TRANSACTIONS -->
+      <section class="section-block">
+        <div class="section-head">
+          <h2>Recent activity</h2>
+          <button class="chip chip-muted" id="viewAllTxBtn">View all (demo)</button>
+        </div>
+
+        <div class="tx-card" id="txList">
+          <!-- Filled by dashboard.js -->
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="dash-footer">
+      <span>© 2025 PAY54 SmartWallet • MIT Licensed Demo</span>
+      <span class="footer-links">
+        <a href="index.html">Status</a> •
+        <a href="index.html#support">Support</a> •
+        <a href="index.html#terms">Terms</a>
+      </span>
+    </footer>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Scripts -->
   <script src="src/js/dashboard.js"></script>
 </body>
 </html>
