@@ -1,26 +1,34 @@
-// PAY54 v6.5 Login Handler
+// PAY54 v6.5 — LOGIN HANDLER
+// ------------------------------------------
 
-document.getElementById("loginForm").addEventListener("submit", function(e){
+document.getElementById("loginForm").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const id = document.getElementById("loginIdentifier").value.trim().toLowerCase();
+    const id = document.getElementById("loginIdentifier").value.trim();
     const pin = document.getElementById("loginPin").value.trim();
 
-    // Retrieve stored PAY54 user
+    // Get stored user
     const user = JSON.parse(localStorage.getItem("pay54_user"));
 
-    // No account created yet
-    if(!user){
+    if (!user) {
         alert("No PAY54 account found. Please create one.");
         window.location.href = "signup.html";
         return;
     }
 
-    // Validate email/phone + PIN
-    if(user.id === id && user.pin === pin){
-        alert("Login successful ✔");
+    // Validate login
+    if (user.identifier === id && user.pin === pin) {
+
+        // Save session
+        localStorage.setItem("pay54_session", JSON.stringify({
+            loggedIn: true,
+            name: user.name,
+            identifier: user.identifier
+        }));
+
         window.location.href = "dashboard.html";
+
     } else {
-        alert("Incorrect login details ❌");
+        alert("Incorrect login details");
     }
 });
