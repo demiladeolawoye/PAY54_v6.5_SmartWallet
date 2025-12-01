@@ -2,120 +2,249 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create Your PAY54 SmartWallet</title>
-  <link rel="stylesheet" href="src/css/auth.css" />
+  <title>Create your PAY54 SmartWallet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- Simple inline styles to match dark premium login look -->
   <style>
+    :root {
+      --pay54-blue: #2563eb;
+      --pay54-blue-soft: #1d4ed8;
+      --pay54-bg: #020617;
+      --pay54-text-main: #e5e7eb;
+      --pay54-text-muted: #9ca3af;
+      --pay54-card: #020617;
+      --pay54-border: rgba(148, 163, 184, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+    }
+
     body {
       margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background: #0a0f24;
-      color: #ffffff;
+      min-height: 100vh;
+      background: radial-gradient(circle at 0% 0%, #1e293b, #020617 60%, #000000 100%);
+      color: var(--pay54-text-main);
       display: flex;
-      justify-content: center;
       align-items: center;
-      height: 100vh;
-      text-align: center;
+      justify-content: center;
+      padding: 24px 12px;
     }
 
-    .auth-container {
-      background: rgba(255,255,255,0.05);
-      padding: 40px;
-      border-radius: 12px;
-      width: 90%;
+    .auth-shell {
+      width: 100%;
       max-width: 420px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.4);
-      backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 20px;
+      padding: 24px 22px 20px;
+      border: 1px solid var(--pay54-border);
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.95);
     }
 
-    .auth-title {
-      font-size: 26px;
-      font-weight: bold;
-      margin-bottom: 10px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
     }
 
-    .auth-sub {
-      color: #b9c4ff;
-      font-size: 14px;
-      margin-bottom: 30px;
+    .brand-shield {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 0%, #60a5fa, var(--pay54-blue-soft) 55%, #020617 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f9fafb;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.8);
     }
 
-    .auth-form label {
-      text-align: left;
-      display: block;
-      font-size: 14px;
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+
+    .brand-tagline {
+      font-size: 0.7rem;
+      color: var(--pay54-text-muted);
+    }
+
+    h1 {
+      margin: 10px 0 2px;
+      font-size: 1.25rem;
+    }
+
+    .subtitle {
+      margin: 0 0 18px;
+      font-size: 0.84rem;
+      color: var(--pay54-text-muted);
+    }
+
+    form.auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    label {
+      font-size: 0.8rem;
+      color: var(--pay54-text-muted);
+    }
+
+    input {
+      padding: 9px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--pay54-border);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--pay54-text-main);
+      font-size: 0.86rem;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #64748b;
+    }
+
+    input:focus {
+      border-color: var(--pay54-blue);
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.6);
+    }
+
+    .pin-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      color: var(--pay54-text-muted);
       margin-bottom: 6px;
-      color: #dce2ff;
     }
 
-    .auth-form input {
+    button.primary-btn {
+      margin-top: 4px;
       width: 100%;
-      padding: 12px;
-      margin-bottom: 18px;
-      border-radius: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
       border: none;
-      background: #1a2240;
-      color: white;
-      font-size: 16px;
-    }
-
-    .auth-btn {
-      width: 100%;
-      background: #1764ff;
-      border: none;
-      padding: 14px;
-      font-size: 16px;
-      border-radius: 8px;
-      color: white;
       cursor: pointer;
-      margin-top: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #f9fafb;
+      background: linear-gradient(90deg, var(--pay54-blue), var(--pay54-blue-soft));
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.8);
     }
 
-    .auth-btn:hover {
-      background: #0f4fe2;
+    button.primary-btn:hover {
+      background: linear-gradient(90deg, #1d4ed8, #1e40af);
     }
 
-    .alt-link {
-      margin-top: 18px;
-      font-size: 14px;
+    .foot-text {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--pay54-text-muted);
+      margin-top: 6px;
     }
 
-    .alt-link a {
-      color: #4ba3ff;
+    .foot-text a {
+      color: #60a5fa;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 500;
+    }
+
+    .foot-text a:hover {
+      text-decoration: underline;
+    }
+
+    .security-text {
+      margin-top: 8px;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--pay54-text-muted);
     }
   </style>
 </head>
-
 <body>
-  <div class="auth-container">
-    <div class="auth-title">Create your PAY54 SmartWallet</div>
-    <div class="auth-sub">Sign up to send, save, shop, pay and invest globally.</div>
+  <main class="auth-shell">
+    <header class="brand">
+      <div class="brand-shield">P54</div>
+      <div class="brand-text">
+        <span class="brand-name">PAY54</span>
+        <span class="brand-tagline">Create your SmartWallet</span>
+      </div>
+    </header>
 
+    <h1>Create your PAY54 SmartWallet</h1>
+    <p class="subtitle">
+      Sign up to send, save, pay, shop and invest globally.
+    </p>
+
+    <!-- SIGNUP FORM -->
     <form id="signupForm" class="auth-form">
-      <label>Full Name</label>
-      <input type="text" id="fullName" required placeholder="John Doe" />
+      <div class="form-row">
+        <label for="fullName">Full name</label>
+        <input id="fullName" name="fullName" type="text"
+               placeholder="John Doe" required />
+      </div>
 
-      <label>Email or Phone</label>
-      <input type="text" id="identifier" required placeholder="you@pay54.app or +2348012345678" />
+      <div class="form-row">
+        <label for="identifier">Email or phone</label>
+        <input id="identifier" name="identifier" type="text"
+               placeholder="you@pay54.app or +2348012345678" required />
+      </div>
 
-      <label>Create 4-digit PIN</label>
-      <input type="password" id="pin" maxlength="4" required placeholder="****" />
+      <p class="hint">Create a 4-digit wallet PIN you won’t forget.</p>
 
-      <label>Confirm PIN</label>
-      <input type="password" id="pin2" maxlength="4" required placeholder="****" />
+      <div class="pin-row">
+        <div class="form-row">
+          <label for="pin">Create 4-digit PIN</label>
+          <input id="pin" name="pin" type="password" inputmode="numeric"
+                 maxlength="4" minlength="4" placeholder="••••" required />
+        </div>
+        <div class="form-row">
+          <label for="confirmPin">Confirm PIN</label>
+          <input id="confirmPin" name="confirmPin" type="password"
+                 inputmode="numeric" maxlength="4" minlength="4"
+                 placeholder="••••" required />
+        </div>
+      </div>
 
-      <button class="auth-btn" type="submit">Create Account</button>
+      <button type="submit" class="primary-btn">Create Account</button>
     </form>
 
-    <div class="alt-link">
-      Already have an account? <a href="index.html">Sign in</a>
-    </div>
-  </div>
+    <p class="foot-text">
+      Already have an account?
+      <a href="login.html">Sign in</a>
+    </p>
 
-  <script src="src/js/signup.js"></script>
+    <p class="security-text">
+      By continuing you agree to PAY54’s demo terms. This v6.5 build is for
+      front-end testing only.
+    </p>
+  </main>
+
+  <!-- Re-use the same main.js that powers login -->
+  <script src="src/js/main.js"></script>
 </body>
 </html>
