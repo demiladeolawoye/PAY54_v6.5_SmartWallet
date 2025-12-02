@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PAY54 • Login</title>
-<link rel="stylesheet" href="src/css/auth.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PAY54 Login</title>
+
+  <link rel="stylesheet" href="src/css/global.css" />
+  <link rel="stylesheet" href="src/css/auth.css" />
 </head>
 
-<body class="auth-body">
+<body class="auth-shell">
 
-<div class="auth-container">
-    <div class="auth-header">
-        <img src="assets/logo.png" class="auth-logo">
-        <h2>Welcome back 👋</h2>
-        <p class="auth-sub">Sign in to your PAY54 SmartWallet</p>
-    </div>
+  <div class="auth-header">
+    <img src="https://raw.githubusercontent.com/demiladeolawoye/PAY54_v6.5_SmartWallet/main/src/img/pay54-logo.png"
+         alt="PAY54" class="auth-logo" />
+  </div>
+
+  <div class="auth-main">
+    <h1 class="auth-title">Welcome back 👋</h1>
 
     <form id="loginForm" class="auth-form">
 
-        <div class="form-row">
-            <label>Email or phone</label>
-            <input id="loginIdentifier" name="identifier" type="text"
-                   placeholder="you@pay54.app or +2348012345678" required>
-        </div>
+      <div class="form-row">
+        <label>Email or phone</label>
+        <input id="loginIdentifier" type="text"
+               placeholder="you@pay54.app or +2348012345678" required />
+      </div>
 
-        <div class="form-row pin-row">
-            <label>4-digit wallet PIN</label>
-            <div class="pin-wrapper">
-                <input id="loginPin" name="pin" type="password" maxlength="4"
-                       placeholder="****" required>
-                <span class="eye-icon" onclick="togglePIN('loginPin', this)">👁️</span>
-            </div>
-        </div>
+      <div class="form-row pin-wrapper">
+        <label>4-digit PIN</label>
+        <input id="loginPin" type="password" maxlength="4" required />
+        <span class="pin-eye" onclick="togglePin('loginPin')">👁️</span>
+      </div>
 
-        <button class="auth-btn">Sign in to PAY54</button>
-
-        <p class="auth-small">
-            New to PAY54? <a href="signup.html">Create an account</a>
-        </p>
+      <button class="auth-btn" type="submit">Sign in to PAY54</button>
     </form>
-</div>
+
+    <p class="auth-switch">
+      New to PAY54? <a href="signup.html">Create an account</a>
+    </p>
+  </div>
+
+  <div class="auth-footer">
+    © 2025 PAY54 SmartWallet
+  </div>
 
 <script src="src/js/pinToggle.js"></script>
 <script src="src/js/login.js"></script>
