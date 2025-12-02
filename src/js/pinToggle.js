@@ -1,11 +1,4 @@
-function togglePIN(id, icon) {
+function togglePin(id) {
     const field = document.getElementById(id);
-
-    if (field.type === "password") {
-        field.type = "text";
-        icon.style.opacity = "1";
-    } else {
-        field.type = "password";
-        icon.style.opacity = "0.6";
-    }
+    field.type = field.type === "password" ? "text" : "password";
 }
