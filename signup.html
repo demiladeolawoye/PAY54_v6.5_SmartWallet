@@ -3,64 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create PAY54 Account</title>
-
+  <title>PAY54 • Create Account</title>
   <link rel="stylesheet" href="src/css/global.css" />
   <link rel="stylesheet" href="src/css/auth.css" />
+  <script defer src="src/js/signup.js"></script>
+  <script defer src="src/js/pinToggle.js"></script>
 </head>
 
 <body class="auth-shell">
 
-  <div class="auth-header">
-    <img src="https://raw.githubusercontent.com/demiladeolawoye/PAY54_v6.5_SmartWallet/main/src/img/pay54-logo.png"
-         alt="PAY54" class="auth-logo"/>
-  </div>
+  <header class="auth-header">
+    <img src="assets/pay54-logo.svg" class="auth-logo" alt="PAY54" />
+    <span class="auth-version">v6.5.2 • SmartWallet</span>
+  </header>
 
-  <div class="auth-main">
+  <main class="auth-main">
 
-    <h1 class="auth-title">Create your PAY54 account</h1>
-    <p class="auth-subtitle">Sign up to send, save, shop & invest globally.</p>
+    <div class="auth-card">
+      <h1 class="auth-heading">Create your PAY54 account</h1>
+      <p class="auth-subheading">Sign up to send, save, shop & invest globally.</p>
 
-    <form id="signupForm" class="auth-form">
+      <form id="signupForm" class="auth-form">
+        
+        <div class="form-row">
+          <label>Full Name</label>
+          <input id="signupName" type="text" required placeholder="Your full name" />
+        </div>
 
-      <div class="form-row">
-        <label>Full Name</label>
-        <input id="signupName" type="text" placeholder="Your full name" required />
-      </div>
+        <div class="form-row">
+          <label>Email or phone</label>
+          <input id="signupIdentifier" type="text" required placeholder="you@pay54.app or +2348012345678" />
+        </div>
 
-      <div class="form-row">
-        <label>Email or phone</label>
-        <input id="signupIdentifier" type="text"
-               placeholder="you@pay54.app or +2348012345678" required />
-      </div>
+        <div class="form-row">
+          <label>Create 4-digit PIN</label>
+          <div class="pin-wrapper">
+            <input id="signupPin" type="password" maxlength="4" required />
+            <span class="pin-eye" onclick="togglePin('signupPin', this)">👁</span>
+          </div>
+        </div>
 
-      <div class="form-row pin-wrapper">
-        <label>Create 4-digit PIN</label>
-        <input id="signupPin" type="password" maxlength="4" required />
-        <span class="pin-eye" onclick="togglePin('signupPin')">👁️</span>
-      </div>
+        <div class="form-row">
+          <label>Confirm PIN</label>
+          <div class="pin-wrapper">
+            <input id="signupConfirmPin" type="password" maxlength="4" required />
+            <span class="pin-eye" onclick="togglePin('signupConfirmPin', this)">👁</span>
+          </div>
+        </div>
 
-      <div class="form-row pin-wrapper">
-        <label>Confirm PIN</label>
-        <input id="signupPinConfirm" type="password" maxlength="4" required />
-        <span class="pin-eye" onclick="togglePin('signupPinConfirm')">👁️</span>
-      </div>
+        <button class="btn-primary" type="submit">Create Account</button>
 
-      <button class="auth-btn" type="submit">Create Account</button>
-    </form>
+        <p class="auth-footnote">
+          Already on PAY54? <a href="login.html">Login</a>
+        </p>
 
-    <p class="auth-switch">
-      Already on PAY54? <a href="login.html">Login</a>
-    </p>
+      </form>
+    </div>
 
-  </div>
+    <div class="auth-side">
+      <h2>Why people love PAY54</h2>
+      <ul class="auth-benefits">
+        <li>🌍 Global cross-border rails</li>
+        <li>🔗 One wallet for all payments</li>
+        <li>🛒 Shop on the fly</li>
+        <li>📊 Smart spend analytics</li>
+      </ul>
+    </div>
 
-  <div class="auth-footer">
-    © 2025 PAY54 SmartWallet
-  </div>
+  </main>
 
-<script src="src/js/pinToggle.js"></script>
-<script src="src/js/signup.js"></script>
+  <footer class="auth-footer">
+    <span>© 2025 PAY54 SmartWallet</span>
+  </footer>
 
 </body>
 </html>
